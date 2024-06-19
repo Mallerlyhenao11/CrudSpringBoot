@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Registro</title>
+    <!-- Incluye el CSS de Tailwind -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+<h1 class="text-2xl font-bold mb-4 text-center">Editar Registro</h1>
+<!-- Formulario para editar el registro -->
+<form th:action="@{/registro/update/{id}(id=${registro.id})}" th:object="${registro}" method="post" class="bg-white shadow-md rounded-lg p-8 max-w-lg mx-auto">
+    <div class="mb-6">
+        <label for="first_name" class="block text-gray-700 text-sm font-bold mb-2">Nombre:</label>
+        <input type="text" id="first_name" th:field="*{first_name}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese su nombre" required aria-required="true"/>
+    </div>
+    <div class="mb-6">
+        <label for="last_name" class="block text-gray-700 text-sm font-bold mb-2">Apellido:</label>
+        <input type="text" id="last_name" th:field="*{last_name}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese su apellido" required aria-required="true"/>
+    </div>
+    <div class="mb-6">
+        <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Correo:</label>
+        <input type="email" id="email" th:field="*{email}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese su correo" required aria-required="true"/>
+    </div>
+    <div class="mb-6">
+        <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Contraseña:</label>
+        <input type="password" id="password" th:field="*{password}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese su contraseña" required aria-required="true" minlength="8"/>
+    </div>
+    <div class="mb-6">
+        <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Descripción:</label>
+        <textarea id="description" th:field="*{description}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese una descripción" required aria-required="true"></textarea>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Guardar</button>
+    </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabla de Usuarios</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+
+</head>
+<body class="bg-gray-100">
+<section th:fragment="table" class="container mx-auto p-4">
+    <div class="container mx-auto text-center py-4">
+        <form th:action="@{/registro/search}" method="get" class="inline-block">
+            <div class="flex items-center space-x-4 justify-start">
+                <div>
+                    <label class="block text-gray-700">Buscar por ID:</label>
+                </div>
+                <div>
+                    <input type="number" name="id" class="form-control block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="id" placeholder="Ingrese el ID">
+                </div>
+                <div>
+                    <input type="submit" class="btn bg-gray-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" value="Buscar">
+                </div>
+            </div>
+        </form>
+    </div>
+    <label th:text="${mensaje}" ></label>
+    <div class="overflow-x-auto">
+        <table id="user-table" class="min-w-full bg-white border border-gray-200 rounded-lg shadow-lg">
+            <thead class="bg-gray-200">
+            <tr>
+                <th class="py-2 px-4 border-b border-gray-300">ID</th>
+                <th class="py-2 px-4 border-b border-gray-300">Nombre</th>
+                <th class="py-2 px-4 border-b border-gray-300">Apellido</th>
+                <th class="py-2 px-4 border-b border-gray-300">Email</th>
+                <th class="py-2 px-4 border-b border-gray-300">Contraseña</th>
+                <th class="py-2 px-4 border-b border-gray-300">Descripción</th>
+                <th class="py-2 px-4 border-b border-gray-300">Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="result : ${result}">
+                <td class="text-center" data-id="${result.id}" th:text="${result.id}"></td>
+                <td class="text-center" th:text="${result.first_name}"></td>
+                <td class="text-center" th:text="${result.last_name}"></td>
+                <td class="text-center" th:text="${result.email}"></td>
+                <td class="text-center" th:text="${result.password != null ? '*'.repeat(result.password.length()) : ''}"></td>
+                <td class="text-center" th:text="${result.description}"></td>
+                <td class="text-center">
+                    <a th:href="@{/registro/edit/{id}(id=${result.id})}" class="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-700">Editar</a>
+                    <a th:href="@{/registros/delete/{id}(id=${result.id})}" class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-700" onclick="return confirm('¿Estás seguro de que quieres eliminar este registro?');">Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+</body>
+</html>
